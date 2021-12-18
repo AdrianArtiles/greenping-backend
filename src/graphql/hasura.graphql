@@ -1,0 +1,52 @@
+query UserByEmail($email: String!) {
+  user(where: {email: {_eq: $email }}) {
+    id
+    email
+    meta
+    account_id
+    created_at
+    updated_at
+  }
+}
+
+query UserById($id: uuid!) {
+  user_by_pk(id: $id) {
+    id
+    email
+    meta
+    account_id
+    created_at
+    updated_at
+  }
+}
+
+query AccountById($id: uuid!) {
+  account_by_pk(id: $id) {
+    id
+    name
+    meta
+    created_at
+    updated_at
+  }
+}
+
+mutation InsertUserEmailAccount($email: String!, $accountId: uuid!) {
+  insert_user_one(object: {email: $email, account_id: $accountId}) {
+    id
+    email
+    meta
+    account_id
+    created_at
+    updated_at
+  }
+}
+
+mutation InsertAccount($name: String) {
+  insert_account_one(object: {name: $name}) {
+    id
+    name
+    meta
+    created_at
+    updated_at
+  }
+}

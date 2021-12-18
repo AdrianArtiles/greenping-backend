@@ -1,0 +1,21 @@
+overwrite: true
+generates:
+  src/generated/resolvers-types.ts:
+    schema: src/resolver.ts
+    config:
+      contextType: ../types/main#Context
+      mappers:
+        User: ../types/main#User as UserModel
+    plugins:
+      - typescript
+      - typescript-resolvers
+  src/generated/hasura.ts:
+    schema:
+      - "${HASURA_GRAPHQL_URL}":
+          headers:
+            x-hasura-admin-secret: "${HASURA_GRAPHQL_ADMIN_SECRET}"
+    documents: src/graphql/hasura.graphql
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request
